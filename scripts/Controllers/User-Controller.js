@@ -1,14 +1,12 @@
 ﻿'use strict';
 var UserController = (function () {
     function registerUser(username, email, pass1, pass2) {
-        // checks username exists
         checkValidUserName(username);
         checkValidEmail(email);
         checkPasswords(pass1, pass2);
         
         return UserModule.getUserByUserName(username).success(function (data) {
             if (data.results.length !== 0) {
-                //alert('User already exist with that username.');
                 notyInCustomContainer($('#registerSection'), 'bottomCenter', 'warning', 'Username is taken.', 3);
                 throw new Error('User already exist with that username.');
             }
@@ -23,11 +21,11 @@ var UserController = (function () {
                 // sign-in registered user:
                 UserController.loginUser(username, pass1);
             }).error(function (error) {
-                alert('Cannot create new user. Try again.');
+                notyInCustomContainer($('#registerSection'), 'bottomCenter', 'error', 'Cannot create new user. Try again.', 3);
                 throw new Error('Cannot create new user. Try again.');
             });
         }).error(function () {
-            alert('Cannot connect to DB.');
+            notyInCustomContainer($('#registerSection'), 'bottomCenter', 'error', 'Cannot connect to DB. Try again.', 3);
             throw new Error('Cannot connect to DB.');
         });
     }
@@ -96,7 +94,6 @@ var UserController = (function () {
             }
             
             window.location = '#/user/' + loggedUser.objectId;
-            //UserView.userProfileView(loggedUser, true);
             UserView.showAndHideLoginLogoutRegisterIfUserIsLogged(true, loggedUser.objectId, loggedUser.username);
         });
     }
@@ -137,25 +134,24 @@ var UserController = (function () {
                     if (loggedUser.username !== user.username) {
                         UserView.userProfileView(user, false);
                     } else if (getSessionLoggedUser().sessionToken !== loggedUserToken) {
-                        alert('expired session.');
+                        notyTopCenter('warning', 'expired session.', 3);
                         UserView.userProfileView(user, false);
                     } else {
                         UserView.userProfileView(user, true);
                     }
 
                 }).error(function () {
-                    alert('Cannot connect to DB. Try again.');
+                    notyInCustomContainer($('#registerSection'), 'bottomCenter', 'error', 'Cannot connect to DB. Try again.', 3);
                     UserView.userProfileView(user, false);
                 });
             }
         }).error(function () {
-            alert('Not existing user.');
+            notyTopCenter('alert', 'Not existing user.', 3);
         });
 
     }
     
     function editUserSingleColumn(userId, sessionToken, columnToChange, newContent) {
-        //var user = getSessionLoggedUser();
         if (columnToChange.toString().toLowerCase() === 'username') {
             throw new Error('Username cannot be changed');
         }
@@ -239,23 +235,27 @@ var UserController = (function () {
                 var editor = getSessionLoggedUser();
                 UserModule.login(editor.username, editorPass).success(function (editorData) {
                     UserModule.editUser(editedUserId, editorData.sessionToken, editedUser).success(function () {
-                        alert('All data was saved.');
+                        notyInCustomContainer($('#userProfileSection'), 'bottomCenter', 'success', 'All data was saved.', 3);
+                        
                         if (isNeededLogout) {
-                            alert('You should login with new username:');
+                            notyTopCenter('warning', 'You should login with new username', 5);
                             loggoutUser();
                             window.location = '#/login/';
                         }
 
                     }).error(function (error) {
+                        notyInCustomContainer($('#userProfileSection'), 'bottomCenter', 'error', 'Cannot save new settings. ' + JSON.parse(error.responseText).error, 3);
                         throw new Error('Cannot save new settings. ' + JSON.parse(error.responseText).error);
                     });
                 }).error(function (error) {
+                    notyInCustomContainer($('#userProfileSection'), 'bottomCenter', 'error', 'Wrong password or you don\'t have permision to edit that user.', 3);
                     throw new Error('Wrong password or you don\'t have permision to edit that user.');
                 });
             } else {
-                alert('No changes to save.');
+                notyInCustomContainer($('#userProfileSection'), 'bottomCenter', 'information', 'No changes to save.', 3);
             }
         }).error(function () {
+            notyInCustomContainer($('#userProfileSection'), 'bottomCenter', 'error', 'Invalid edited user ID.', 3);
             throw new Error('Invalid edited user ID.');
         });
     }

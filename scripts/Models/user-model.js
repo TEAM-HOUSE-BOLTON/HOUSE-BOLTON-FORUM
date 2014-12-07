@@ -1,5 +1,4 @@
 ﻿'use strict';
-
 var UserModule = (function () {
     function getUserByUserName(username) {
         return $.ajax({
@@ -13,18 +12,6 @@ var UserModule = (function () {
     }
     
     function addUserToDatabase(username, email, pass1) {
-        //var acl = {
-        //    "*": {
-        //        "read": false
-        //    }
-        //};
-        
-        //var ACL = {};
-        ////ACL['qZ047wDesX'] = { "write": true, "read": true };
-        //ACL['*'] = { "read": false };
-        ////ACL["role:admin"] = { "read": true, "write": true };
-        
-        
         return $.ajax({
             type: "POST",
             headers: {
@@ -54,18 +41,15 @@ var UserModule = (function () {
     function getUserById(userId) {
         return $.ajax({
             type: "GET",
-            beforeSend: function (request) {
+            beforeSend: function(request) {
                 request.setRequestHeader('X-Parse-Application-Id', parseConstants.PARSE_APPLICATION_ID);
                 request.setRequestHeader('X-Parse-REST-API-Key', parseConstants.PARSE_REST_API_KEY);
             },
             url: "https://api.parse.com/1/users/" + encodeURI(userId),
             contentType: 'application/json',
             dataType: 'json',
-        }).error(function () {
+        }).error(function() {
             alert('Cannot get user with that ID.');
-        }).success(function (data) {
-            // alert('Successfully got user by ID.');
-            // console.log(data);
         });
     }
     
@@ -138,10 +122,6 @@ var UserModule = (function () {
             data: file,
             processData: false,
             contentType: false,
-            success: function (data) {
-                console.log("File available at: " + data.url);
-                // alert("File available at: " + data.url);
-            },
             error: function (data) {
                 var obj = jQuery.parseJSON(data);
                 alert(obj.error);
@@ -160,10 +140,6 @@ var UserModule = (function () {
                 request.setRequestHeader("X-Parse-Master-Key", 'N4JvXVmG7tyNEIrUKc4H1MPU0MLIAdpRzdnicAlI');
             },
             url: serverUrl,
-            success: function (data) {
-                console.log("File deleted!");
-                // alert("File available at: " + data.url);
-            },
             error: function (data) {
                 var obj = jQuery.parseJSON(data);
                 alert(obj.error);

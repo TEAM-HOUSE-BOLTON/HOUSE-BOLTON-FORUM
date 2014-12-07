@@ -19,8 +19,6 @@ var UserView = (function () {
         
         var parentContainer = $('main');
         parentContainer.children().remove();
-        
-        // check if register container exists in DOM
         var existingRegisterContainer = $('#registerSection');
         if (existingRegisterContainer.length == 0) {
             var registerContainer = $('<article>')
@@ -67,7 +65,6 @@ var UserView = (function () {
     }
     
     function removeRegisterView() {
-        // check if register container exists in DOM
         var existingRegisterContainer = $('#registerSection');
         if (existingRegisterContainer.length !== 0) {
             existingRegisterContainer.remove();
@@ -129,7 +126,6 @@ var UserView = (function () {
     }
     
     function removeLoginView() {
-        // check if login container exists in DOM
         var existingLoginContainer = $('#loginSection');
         if (existingLoginContainer.length !== 0) {
             existingLoginContainer.remove();
@@ -174,10 +170,6 @@ var UserView = (function () {
         var profileInfoContainer = $('<div>')
                 .attr('id', 'profileInfoContainer')
                 .appendTo(userProfileContainer);
-        $('<label>')
-                .text('Ranking:' + user.ranking)
-                .attr('id', 'rankingProfileLabel')
-                .appendTo(profileInfoContainer);
         
         $('<h4>')
                 .attr('id', 'personalInfoHeading')
@@ -228,7 +220,6 @@ var UserView = (function () {
             
             if (isYours) {
                 var isMaleSelect = $('<select>').attr('id', 'isMaleGenderSelect');
-                var undefinedOption = $('<option>').attr('value', 'null').text('').appendTo(isMaleSelect);
                 var maleOption = $('<option>').attr('value', true).text('Male').appendTo(isMaleSelect);
                 var femaleOption = $('<option>').attr('value', false).text('Female').appendTo(isMaleSelect);
                 if (user.isMale == undefined || user.isMale == null) {
@@ -257,6 +248,7 @@ var UserView = (function () {
             UserController.getDefaultUser().success(function (data) {
                 avatarImg.attr('src', data.defaultAvatar.url);
             }).error(function () {
+                notyTopCenter('error', 'Cannot load (default) user avatar.', 3);
                 throw Error('Cannot load (default) user avatar.');
             });
         } else {
@@ -271,9 +263,6 @@ var UserView = (function () {
                 .attr('accept', 'image/*')
                 .click(user, changeAvatar)
                 .appendTo(profileImageContainer);
-            
-            // TODO: add user role label
-            //$('<label>').text('Rank:' + userRole.name).attr('id', 'profileImage').attr('src', user.avatar).appendTo(userProfileContainer);
             
             $('<input>')
                 .attr('id', 'confirmPass')
@@ -304,7 +293,7 @@ var UserView = (function () {
                     $('#profileImage').attr('src', upploadedFile.url).attr('alt', user.username).attr('data-filename', JSON.stringify(upploadedFile));
                 })
                 .error(function () {
-                    alert('Cannot load that image.');
+                    notyTopCenter('error', 'Cannot load that image.', 3);
                 });
             });
         }
@@ -332,7 +321,6 @@ var UserView = (function () {
     }
     
     function removeUserProfileView() {
-        // check if login container exists in DOM
         var existingUserProfileContainer = $('#userProfileSection');
         if (existingUserProfileContainer.length !== 0) {
             existingUserProfileContainer.remove();
@@ -357,7 +345,7 @@ var UserView = (function () {
             }
             
             if (logoutLi.length === 0) {
-                logoutLi = $('<li>').attr('id', 'logoutLi').appendTo(navUl);
+                logoutLi = $('<li>').attr('id', 'logoutLi').insertBefore(navUl.children().first());
             }
             
             $('<a>')
@@ -367,7 +355,7 @@ var UserView = (function () {
             .appendTo(logoutLi);
             
             if (userProfileLi.length === 0) {
-                userProfileLi = $('<li>').attr('id', 'userProfileLi').appendTo(navUl);
+                userProfileLi = $('<li>').attr('id', 'userProfileLi').insertBefore(navUl.children().last());
             }
             
             $('<a>')
@@ -386,7 +374,7 @@ var UserView = (function () {
             }
             
             if (loginLi.length === 0) {
-                loginLi = $('<li>').attr('id', 'loginLi').appendTo(navUl);
+                loginLi = $('<li>').attr('id', 'loginLi').insertBefore(navUl.children().last());
             }
             
             $('<a>')
@@ -396,7 +384,7 @@ var UserView = (function () {
             .appendTo(loginLi);
             
             if (registerLi.length === 0) {
-                registerLi = $('<li>').attr('id', 'registerLi').appendTo(navUl);
+                registerLi = $('<li>').attr('id', 'registerLi').insertBefore(navUl.children().last());
             }
             
             $('<a>')

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/example.css" type="text/css" />
     <link rel="stylesheet" href="styles/responsive.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="styles/icoCSS.css" rel="stylesheet" />
+    <link href="styles/login.css" rel="stylesheet" />
     <!--<STYLES>-->
 
     <script src="libs/jquery-2.1.1.min.js"></script>
@@ -16,60 +16,61 @@
     <script src="libs/jquery.noty.packaged.min.js"></script>
 
     <!--<MODELS>-->
-    <script src="scripts/Models/Questions-API.js"></script>
-    <script src="scripts/Models/Answers-API.js"></script>
-    <script src="scripts/Models/Categories-API.js"></script>
-    <script src="scripts/Models/QuestionTagRelation-API.js"></script>
-    <script src="scripts/Models/Tags-API.js"></script>
-    <script src="scripts/Models/User-API.js"></script>
+    <script src="scripts/Models/questions-model.js"></script>
+    <script src="scripts/Models/answers-model.js"></script>
+    <script src="scripts/Models/categories-model.js"></script>
+    <script src="scripts/Models/questionTagRelation-model.js"></script>
+    <script src="scripts/Models/tags-model.js"></script>
+    <script src="scripts/Models/user-model.js"></script>
     <!--</MODELS>-->
     <!--<CONTROLLERS>-->
-	<script src="scripts/Controllers/User-Controller.js"></script>
-	<script src="scripts/Controllers/Answer-Controller.js"></script>
-    <script src="scripts/Controllers/Category-Controller.js"></script>
-    <script src="scripts/Controllers/Question-Controller.js"></script>
-    <script src="scripts/Controllers/Tag-Controller.js"></script>
-    <script src="scripts/Controllers/QuestionTagRelation-Controller.js"></script>
-    <script src="scripts/Controllers/Sammy-Controller.js"></script>
+    <script src="scripts/Controllers/user-controller.js"></script>
+    <script src="scripts/Controllers/answer-controller.js"></script>
+    <script src="scripts/Controllers/category-controller.js"></script>
+    <script src="scripts/Controllers/question-controller.js"></script>
+    <script src="scripts/Controllers/tag-controller.js"></script>
+    <script src="scripts/Controllers/questionTagRelation-controller.js"></script>
+    <script src="scripts/Controllers/sammy-controller.js"></script>
 
     <!--</CONTROLLERS>-->
     <!--<VIEWS>-->
-    <script src="scripts/Views/Answer-View.js"></script>
-    <script src="scripts/Views/Question-View.js"></script>
-    <script src="scripts/Views/Tag-View.js"></script>
-    <script src="scripts/Views/Category-View.js"></script>
-    <script src="scripts/Views/User-View.js"></script>
+    <script src="scripts/Views/answer-view.js"></script>
+    <script src="scripts/Views/question-view.js"></script>
+    <script src="scripts/Views/tag-view.js"></script>
+    <script src="scripts/Views/category-view.js"></script>
+    <script src="scripts/Views/user-view.js"></script>
     <!--</VIEWS>-->
     <script src="scripts/main.js"></script>
 </head>
 <body class="body">
     <ul id="noty_topCenter_layout_container"></ul>
-<header class="mainHeader">
-    <a href="#/"><img src="images/pin.png"></a>
-    <nav><ul>
-        <li><a href="#/add/question">ask Question</a></li>
-        <li><a href="#">Rules</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contacts</a></li>
-    </ul></nav>
-</header>
+    <header class="mainHeader">
+        <a href="#/"><img src="images/pin.png"></a>
+        <nav>
+            <ul>
+                
+                <li><a href="#/add/question">ask Question</a></li>
+                <li><a href="#/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="mainContent">
-    <main class="content">
+    <div class="mainContent">
+        <main class="content">
 
-    </main>
+        </main>
 
-    <aside id="categories">
-        <h2>Category</h2>
-    </aside>
+        <aside id="categories">
+            <h2>Category</h2>
+        </aside>
 
-    <aside id="tags">
+        <aside id="tags">
             <h2>Tags</h2>
-    </aside>
-</div>
+        </aside>
+    </div>
 
-<footer class="mainFooter">
-    <p>Footer</p>
-</footer>
+    <footer class="mainFooter">
+        <p>Footer</p>
+    </footer>
 </body>
 </html>

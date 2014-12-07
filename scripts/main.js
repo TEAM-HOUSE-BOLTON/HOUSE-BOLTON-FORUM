@@ -2,7 +2,6 @@ $(function () {
     //    questionController.getAndVisualizeLastNQuestions(NUMBER_OF_LAST_QUESTIONS_DEFAULT);
     TagsController.getAndVisualizeTags();
     categoryController.getAndVisualizeCategories();
-    
     UserController.checkIsUserLoggedIn();
 });
 
@@ -14,7 +13,6 @@ function notyTopCenter(type, text, timeInSeconds) {
         layout      : 'topCenter',
         theme       : 'defaultTheme',
         timeout: timeInSeconds * 1000
-        //maxVisible  : 10
     });
 }
 
