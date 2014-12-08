@@ -18,8 +18,8 @@ var categoryController = (function () {
 				var h1 = CategoryView.viewSingleCategory(data).addClass('category-title');
 				$(h1).prependTo(selector);
 			});
-        questionsModule.getAllQuestionsFromCategory(categoryId).success(function (data) {
-            questionController.getAndVisualizeSmallQuestions(data.results, selector);
+        QuestionModule.getAllQuestionsFromCategory(categoryId).success(function (data) {
+            QuestionController.getAndVisualizeSmallQuestions(data.results, selector);
         })
 	}
 

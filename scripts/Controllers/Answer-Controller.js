@@ -40,14 +40,14 @@ var AnswerController = (function () {
 	
 	/*
     function VisualizeAddQuestion(selector) {
-        selector.append(questionView.visualizeAddQuestion());
+        selector.append(QuestionView.visualizeAddQuestion());
         $('#add-question-button').click(function () {
             var title = $('#title').val();
             var content = $('#content').val();
             var user = 'i2Mq1WP3sN'; //TODO;
             var tags = $('#tags').val();
             var category = 'Q3V1RqV0JD'; // TODO: $('#category').find(":selected").val();
-            questionsModule.addQuestion(title, content, user, category, tags).success(function (data) {
+            QuestionModule.addQuestion(title, content, user, category, tags).success(function (data) {
                 window.history.pushState('Home', 'Home', '#/view/question/' + data.objectId);
             });
         })

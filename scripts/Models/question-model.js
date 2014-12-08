@@ -1,4 +1,4 @@
-var questionsModule = (function () {
+var QuestionModule = (function () {
 
     function addQuestion(title, content, userID, categoryID, tagIDsArray) {
         var question = {

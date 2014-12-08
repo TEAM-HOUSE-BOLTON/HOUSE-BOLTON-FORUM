@@ -1,6 +1,4 @@
-var questionController = (function () {
-    
-    
+var QuestionController = (function () {
     function visualizeSmallQuestions(questions, selector, limitForContent) {
         var dfd = new jQuery.Deferred();
         $.each(questions, function (_, question) {
@@ -25,7 +23,7 @@ var questionController = (function () {
                 var questionVisits = question.visits;
                 var questionVotes = question.votes;
 
-                var questionHTML = questionView.visualizeSmallQuestion(question.objectId, questionCreatedAt, questionTitle, questionContent, questionAuthor, questionCategory, questionCategoryID, questionTags, questionVisits, questionVotes, questionAuthorId);
+                var questionHTML = QuestionView.visualizeSmallQuestion(question.objectId, questionCreatedAt, questionTitle, questionContent, questionAuthor, questionCategory, questionCategoryID, questionTags, questionVisits, questionVotes, questionAuthorId);
                 selector.append(questionHTML);
                 dfd.resolve('Success');
             })
@@ -35,7 +33,7 @@ var questionController = (function () {
     }
     
     function getAndVisualizeLastNQuestions(n, selector) {
-        var questionsPromise = questionsModule.getAllQuestions(n);
+        var questionsPromise = QuestionModule.getAllQuestions(n);
         questionsPromise.success(function (data) {
             var questions = data.results;
 
@@ -46,8 +44,8 @@ var questionController = (function () {
     }
     
     function getAndVisualizeQuestionByID(questionID, selector) {
-        questionsModule.upVisitsByOne(questionID);
-        var questionPromise = questionsModule.getQuestionByID(questionID);
+        QuestionModule.upVisitsByOne(questionID);
+        var questionPromise = QuestionModule.getQuestionByID(questionID);
         questionPromise.success(function (question) {
             visualizeSmallQuestions([question], selector).then(function (data) {
                 AnswerController.visualizeAllAnswers(questionID, selector);
@@ -65,7 +63,7 @@ var questionController = (function () {
             selector.append($pleaseLogin);
         }
         else {
-            selector.append(questionView.visualizeAddQuestion());
+            selector.append(QuestionView.visualizeAddQuestion());
             categoryController.fillCategoriesSelect();
             $('#add-question-button').click(function () {
                 var title = $('#title').val();
@@ -87,11 +85,13 @@ var questionController = (function () {
                 });
                 jQuery.ajaxSetup({async:true});
                 var category = $('select').find(':selected').attr('value');
-                questionsModule.addQuestion(title, content, user, category, tagIds).success(function (data) {
+                QuestionModule.addQuestion(title, content, user, category, tagIds).success(function (data) {
                     window.history.pushState('Home', 'Home', '#/view/question/' + data.objectId);
                     $.each(tagIds, function (_, tagId) {
                         tagModule.editTag(tagId, data.objectId);
                     })
+                }).error(function (error) {
+                    notyTopCenter('alert', 'Cannot add question', 3);
                 });
             })
         }

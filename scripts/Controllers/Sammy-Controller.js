@@ -5,16 +5,16 @@ $(function () {
 
         this.get('#/', function () {
             mainSelector.text('');
-            questionController.getAndVisualizeLastNQuestions(NUMBER_OF_LAST_QUESTIONS_DEFAULT, mainSelector);
+            QuestionController.getAndVisualizeLastNQuestions(NUMBER_OF_LAST_QUESTIONS_DEFAULT, mainSelector);
         });
         
         this.get('#/view/question/:id', function (context) {
             mainSelector.text('');
-            questionController.getAndVisualizeQuestionByID(this.params['id'], mainSelector);
+            QuestionController.getAndVisualizeQuestionByID(this.params['id'], mainSelector);
         });
         this.get('#/add/question', function (context) {
             mainSelector.text('');
-            questionController.VisualizeAddQuestion(mainSelector);
+            QuestionController.VisualizeAddQuestion(mainSelector);
         });
         this.get('#/view/tag/:id', function (context) {
             mainSelector.text('');

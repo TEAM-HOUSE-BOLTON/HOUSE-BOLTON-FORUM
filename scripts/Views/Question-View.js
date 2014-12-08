@@ -1,4 +1,4 @@
-var questionView = (function () {
+var QuestionView = (function () {
     function visualizeSmallQuestion(questionID, questionCreatedAt, questionTitle, questionContent, questionAuthor, questionCategory, questionCategoryID, questionTags, questionVisits, questionVotes, questionAuthorId){
         var title = $('<h2 data-id="' + questionID + '">').attr('class', 'small-question-title').append($('<a href="#/view/question/'+ questionID + '">').text(questionTitle));
         var content = $('<p>').attr('class', 'small-question-content').text(questionContent);

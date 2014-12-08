@@ -12,7 +12,7 @@ var TagsController =(function() {
 				var tagsHTML = TagView.visualizeTags(tag);
 				tagsHTML.data("tag", tag);
 				var count = 0;
-				var countQuestionWithTag = questionsModule.getAllQuestionRelatedToTag(tag.objectId);
+				var countQuestionWithTag = QuestionModule.getAllQuestionRelatedToTag(tag.objectId);
 				var countQuestion = countQuestionWithTag.success(function(data) {
 					count = data.results.length;
 					var tagId = tag.objectId;
@@ -26,8 +26,8 @@ var TagsController =(function() {
 }
 
 	function visualizeQuestions(tagId, selector) {
-		questionsModule.getAllQuestionRelatedToTag(tagId).success(function (data) {
-            questionController.getAndVisualizeSmallQuestions(data.results, selector);
+		QuestionModule.getAllQuestionRelatedToTag(tagId).success(function (data) {
+            QuestionController.getAndVisualizeSmallQuestions(data.results, selector);
         })
 	}
 
