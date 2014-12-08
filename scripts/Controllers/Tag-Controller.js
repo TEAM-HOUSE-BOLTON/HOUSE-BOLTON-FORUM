@@ -19,31 +19,11 @@ var TagsController =(function() {
 					$('#'+tagId).css({"font-size": 16 + count + "px"});
 				});
 				tagsDiv.append(tagsHTML[0]);
-
 			})
-	}).error(function (err) {
-        console.log(err);
+	}).error(function () {
+        notyInCustomContainer($('#tags'), 'bottomCenter', 'error', 'Cannot connect to DB. Try again.', 3);
     });
 }
-
-	function checkIfTagExitsByName(name, questionId) {
-		var promise = tagModule.getTagByName(name);
-		promise.success(function(data) {
-				if (data.results.length) {
-					var tagId = data.results[0].objectId;
-					tagModule.editTag(tagId, questionId);
-					console.log(data.results[0].objectId);
-				} else {
-					var questionIdsArray = [questionId];
-					tagModule.addTag(name, questionIdsArray);
-				}
-		}).error(function (err) {
-            console.log(err);
-        });
-	}
-
-
-
 
 	function visualizeQuestions(tagId, selector) {
 		questionsModule.getAllQuestionRelatedToTag(tagId).success(function (data) {
@@ -51,13 +31,8 @@ var TagsController =(function() {
         })
 	}
 
-	function handleError() {
-		console.log("Error");
-	 }
-
 	return {
 		getAndVisualizeTags: getAndVisualizeTags,
-		checkIfTagExitsByName: checkIfTagExitsByName,
         visualizeQuestions: visualizeQuestions
 	}
 
