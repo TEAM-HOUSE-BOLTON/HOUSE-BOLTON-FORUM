@@ -2,8 +2,8 @@ var QuestionController = (function () {
     function visualizeSmallQuestions(questions, selector, limitForContent) {
         var dfd = new jQuery.Deferred();
         $.each(questions, function (_, question) {
-            jQuery.ajaxSetup({async:false});
-            $.when(tagModule.getAllTagsRelatedToQuestion(question.objectId)).done(function (tagData) {
+//            jQuery.ajaxSetup({async:false});
+            tagModule.getAllTagsRelatedToQuestion(question.objectId).success(function (tagData) {
                 var questionTitle = question.title;
                 var questionContent;
                 if (limitForContent) {
@@ -26,9 +26,9 @@ var QuestionController = (function () {
                 var questionHTML = QuestionView.visualizeSmallQuestion(question.objectId, questionCreatedAt, questionTitle, questionContent, questionAuthor, questionCategory, questionCategoryID, questionTags, questionVisits, questionVotes, questionAuthorId);
                 selector.append(questionHTML);
                 dfd.resolve('Success');
-            })
+            });
         });
-        jQuery.ajaxSetup({async:true});
+//        jQuery.ajaxSetup({async:true});
         return dfd.promise();
     }
     
