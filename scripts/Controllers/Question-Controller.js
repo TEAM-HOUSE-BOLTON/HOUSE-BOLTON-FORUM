@@ -86,7 +86,7 @@ var QuestionController = (function () {
                 jQuery.ajaxSetup({async:true});
                 var category = $('select').find(':selected').attr('value');
                 QuestionModule.addQuestion(title, content, user, category, tagIds).success(function (data) {
-                    window.history.pushState('Home', 'Home', '#/view/question/' + data.objectId);
+                    window.location = '#/view/question/' + data.objectId;
                     $.each(tagIds, function (_, tagId) {
                         tagModule.editTag(tagId, data.objectId);
                     })
